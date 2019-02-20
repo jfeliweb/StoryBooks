@@ -1,6 +1,11 @@
 const express = require('express'),
     mongoose = require('mongoose'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
     passport = require('passport');
+
+//  Load User Model
+require('./models/Users');
 
 // Passport Config
 require('./config/passport')(passport);
@@ -27,9 +32,19 @@ app.get('/', (req, res) => {
     res.send('Home');
 });
 
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Use Routes
 app.use('/auth', auth);
-
 
 const port = process.env.PORT || 3000;
 
