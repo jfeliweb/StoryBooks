@@ -43,9 +43,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Set global varibles
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 // Use Routes
 app.use('/auth', auth);
 
+
+// Run Server
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
