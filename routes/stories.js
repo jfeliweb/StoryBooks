@@ -10,7 +10,15 @@ const {
 
 // Index Stories Route
 router.get('/', (req, res) => {
-    res.render('stories/index');
+    Story.find({
+            status: 'public'
+        })
+        .populate('user')
+        .then(stories => {
+            res.render('stories/index', {
+                stories: stories
+            });
+        });
 });
 
 // Add Stories Form
