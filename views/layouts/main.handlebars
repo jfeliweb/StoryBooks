@@ -23,10 +23,14 @@
     {{> _footer}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.11.2/basic/ckeditor.js"></script>
     <script>
         $(document).ready(() => {
             $('.button-collapse').sideNav();
+            $('select').material_select();
         });
+
+        CKEDITOR.replace('body');
     </script>
 </body>
 </html>
