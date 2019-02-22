@@ -1,9 +1,10 @@
-const express = require('express'),
-    exphbs = require('express-handlebars'),
-    mongoose = require('mongoose'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    passport = require('passport');
+const express       = require('express'),
+    path            = require('path'),
+    exphbs          = require('express-handlebars'),
+    mongoose        = require('mongoose'),
+    cookieParser    = require('cookie-parser'),
+    session         = require('express-session'),
+    passport        = require('passport');
 
 //  Load User Model
 require('./models/Users');
@@ -52,6 +53,9 @@ app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 });
+
+// Static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Use Routes
 app.use('/', index);
