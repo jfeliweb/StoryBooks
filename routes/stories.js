@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             status: 'public'
         })
         .populate('user')
-        .populate('comments.commentUser')
+        .sort({date: 'desc'})
         .then(stories => {
             res.render('stories/index', {
                 stories: stories
@@ -28,6 +28,7 @@ router.get('/show/:id', (req, res) => {
         _id: req.params.id
     })
     .populate('user')
+    .populate('comments.commentUser')
     .then(story => {
         res.render('stories/show', {
             story: story
